@@ -95,6 +95,7 @@ export async function POST(request: NextRequest) {
     const { events, appId } = body;
     const apiKey = appId;
 
+    console.log("apiKey", apiKey);
     const isValid = validateSourceUrl(request?.url);
     if (!isValid)
       return NextResponse.json(
@@ -102,6 +103,7 @@ export async function POST(request: NextRequest) {
         { status: 200, headers: corsHeaders(origin) }
       );
 
+    console.log("isValid", isValid);
     if (!country || !apiKey) {
       return NextResponse.json(
         { error: "invalid request" },
@@ -113,7 +115,7 @@ export async function POST(request: NextRequest) {
     }
 
     const sanitizedApiKey = apiKey?.replace(/[^a-zA-Z0-9-_\/]/g, "");
-
+    console.log("sanitizedApiKey", sanitizedApiKey);
     if (!sanitizedApiKey) {
       return NextResponse.json(
         { error: "Invalid apiKey" },
@@ -148,6 +150,7 @@ export async function POST(request: NextRequest) {
         { status: 200, headers: corsHeaders(origin) }
       );
     }
+    console.log("apiKeyValidation", apiKeyValidation);
 
     // Normalize country code to uppercase
     const countryCode = country.toUpperCase();
