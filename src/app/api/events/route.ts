@@ -237,7 +237,10 @@ export async function POST(request: NextRequest) {
     } else {
       await redis.json.set(key, "$", trackedEvents);
     }
-    return NextResponse.json([]);
+    return NextResponse.json(
+      { message: "Events saved successfully" },
+      { status: 200, headers: corsHeaders(origin) }
+    );
   } catch {
     return NextResponse.json(
       { error: "Failed to fetch tier information" },
