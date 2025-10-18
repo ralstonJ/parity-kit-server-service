@@ -92,7 +92,8 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const origin = request.headers.get("Origin") || "";
     const { country, city } = geolocation(request);
-    const { events, apiKey } = body;
+    const { events, appId } = body;
+    const apiKey = appId;
 
     const isValid = validateSourceUrl(request?.url);
     if (!isValid)
